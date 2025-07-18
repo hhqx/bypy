@@ -2039,6 +2039,7 @@ try to create a file at PCS by combining slices, having MD5s specified
 
 				f.write(r.content)
 				pos = f.tell()
+				print(pos, rsize, start_time, self._existing_size)
 				pprgr(pos, rsize, start_time, existing = self._existing_size)
 				if pos - offset == expectedBytes:
 					return const.ENoError
@@ -2245,6 +2246,7 @@ To stream a file using downfile, you can use the 'mkfifo' trick with omxplayer e
 		else:
 			localfile = localpath
 
+		# import ipdb; ipdb.set_trace()
 		pcsrpath = get_pcs_path(remotefile)
 		return self._downfile(pcsrpath, localfile)
 
@@ -3665,7 +3667,7 @@ def getparser():
 
 	# support aria2c
 	parser.add_argument("--downloader",
-		dest="downloader", default="",
+		dest="downloader", default="aria2",
 		help="downloader to use (use python if not specified). valid values: {} [default: %(default)s]".format(const.Downloaders))
 	parser.add_argument("--downloader-arguments",
 		dest="downloader_args", default="",
